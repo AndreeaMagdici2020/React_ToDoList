@@ -1,0 +1,15 @@
+.header {
+  height: 80px;
+  width: 100%;
+  background-color: #39cccc;
+  color: navy;
+  font-size: 25px;
+  font-weight: bold;
+  flex-shrink: 10;
+}
+.span {
+  margin-left: 3%;
+  margin-right: 3%;
+  vertical-align: middle;
+  flex-shrink: 10;
+}

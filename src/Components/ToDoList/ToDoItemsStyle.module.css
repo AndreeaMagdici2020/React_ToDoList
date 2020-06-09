@@ -1,0 +1,10 @@
+.todoitem {
+  background-color: rgba(175, 238, 238, 0.87);
+  border: 1px solid navy;
+  padding: 5px 5px;
+  color: navy;
+  font-size: 20px;
+}
+.checkbox {
+  margin-right: 30px;
+}

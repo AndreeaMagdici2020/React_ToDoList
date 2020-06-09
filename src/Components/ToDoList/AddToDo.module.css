@@ -1,0 +1,41 @@
+.addToDo {
+  height: 60px;
+  width: 100%;
+  vertical-align: middle;
+  display: flex;
+}
+
+.input {
+  width: 90%;
+  height: 54px;
+  margin-left: 0px;
+  flex-shrink: 10;
+  margin-top: 0px;
+  background-color: #3d9970;
+  border-radius: 5px;
+  color: white;
+}
+.input::placeholder {
+  color: navy;
+}
+.form {
+  float: left;
+  height: 100%;
+  width: 100%;
+  vertical-align: middle;
+  flex-shrink: 20;
+  display: flex;
+}
+.btn {
+  height: 60px;
+  width: 10%;
+  margin-top: 0px;
+  margin-left: 0px;
+  float: right;
+  padding: 10px;
+  border: 1px solid navy;
+  border-radius: 5px;
+  background-color: #2ecc40;
+  color: white;
+  cursor: pointer;
+}

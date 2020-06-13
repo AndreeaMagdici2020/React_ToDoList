@@ -23,10 +23,33 @@ class App extends React.Component {
       toDoItems: this.state.toDoItems.map((item) => {
         if (item.id === id) {
           item.done = !item.done;
+          console.log(item);
         }
         return item;
       }),
     });
+    var itemDinLocalStorage = localStorage.getItem("ItemsinLocalStorage");
+    console.log("itemDinLocalStorage", JSON.parse(itemDinLocalStorage));
+    console.log(
+      "itemul de modificat",
+      JSON.parse(itemDinLocalStorage).toDoItems.map((item) => {
+        if (item.id === id) {
+          item.done = !item.done;
+        }
+        return item;
+      })
+    );
+    var pd = JSON.parse(itemDinLocalStorage).toDoItems.map((item) => {
+      if (item.id === id) {
+        item.done = !item.done;
+      }
+      return item;
+    });
+    console.log("pd este", pd);
+    localStorage.setItem(
+      "ItemsinLocalStorage",
+      JSON.stringify({ toDoItems: pd })
+    );
   };
   addToDo = (title) => {
     const newToDo = {
@@ -42,12 +65,12 @@ class App extends React.Component {
   };
   delToDo = (id) => {
     this.setState({
-      toDoItems: [...this.state.toDoItems.filter((item) => item.id != id)],
+      toDoItems: [...this.state.toDoItems.filter((item) => item.id !== id)],
     });
     localStorage.setItem(
       "ItemsinLocalStorage",
       JSON.stringify({
-        toDoItems: [...this.state.toDoItems.filter((item) => item.id != id)],
+        toDoItems: [...this.state.toDoItems.filter((item) => item.id !== id)],
       })
     );
   };

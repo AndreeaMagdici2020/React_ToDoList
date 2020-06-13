@@ -12,6 +12,11 @@ class AddToDo extends React.Component {
     this.props.addToDo(this.state.title);
     this.setState({ title: "" });
   };
+  onKeyDownHandler = (e) => {
+    if (e.keyCode === 13) {
+      this.onSubmit();
+    }
+  };
   render() {
     return (
       <div className={styles.addToDo}>
@@ -22,6 +27,7 @@ class AddToDo extends React.Component {
             className={styles.input}
             placeholder="Add things to do"
             onChange={this.onChange}
+            onKeyPress={this.onKeyDownHandler}
             value={this.state.value}
           ></input>
           <input className={styles.btn} type="submit" value="➕"></input>

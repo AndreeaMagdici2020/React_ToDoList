@@ -1,11 +1,14 @@
 import React from "react";
 import styles from "./ToDoItemsStyle.module.css";
+
+import HighlightOffTwoToneIcon from "@material-ui/icons/HighlightOffTwoTone";
 class ToDoItem extends React.Component {
   render() {
     const { id } = this.props;
     return (
       <div className={styles.todoitem}>
         <input
+          className={styles.checkbok}
           onChange={() => {
             this.props.markComplete(id);
             console.log("id", id);
@@ -14,16 +17,12 @@ class ToDoItem extends React.Component {
           checked={this.props.checked}
         ></input>
         {this.props.todo.title}
-        <button
-          style={{
-            marginLeft: "50px",
-            backgroundColor: "rgba(175, 238, 238, 0.87)",
-            border: "none",
-          }}
+        <HighlightOffTwoToneIcon
+          className={styles.deleteBtn}
+          color="secondary"
           onClick={() => this.props.delToDo(id)}
-        >
-          <span role="img">❌</span>
-        </button>
+          style={{ fontSize: "31" }}
+        />
       </div>
     );
   }

@@ -1,22 +1,30 @@
 .addToDo {
   height: 60px;
   width: 100%;
+  margin-bottom: 5px;
   vertical-align: middle;
   display: flex;
+  background-color: #0000cc;
+  -webkit-box-shadow: 0px -5px 5px 0px rgba(190, 179, 224, 1);
+  -moz-box-shadow: 0px -5px 5px 0px rgba(190, 179, 224, 1);
+  box-shadow: 0px -5px 5px 0px rgba(190, 179, 224, 1);
 }
 
 .input {
-  width: 90%;
-  height: 54px;
-  margin-left: 0px;
+  width: 20%;
+  height: 35px;
+  margin-left: 10%;
   flex-shrink: 10;
-  margin-top: 0px;
-  background-color: #3d9970;
+  margin-top: 9px;
+  background-color: #aaaadd;
   border-radius: 5px;
+  border-color: #0000cc;
   color: white;
+  font-size: 18px;
 }
 .input::placeholder {
-  color: navy;
+  color: white;
+  font-size: 20px;
 }
 .form {
   float: left;
@@ -27,15 +35,15 @@
   display: flex;
 }
 .btn {
-  height: 60px;
-  width: 10%;
-  margin-top: 0px;
-  margin-left: 0px;
-  float: right;
+  height: 45px;
+  width: 45px;
+  margin-top: 7px;
+  margin-left: 60%;
+  float: left;
   padding: 10px;
   border: 1px solid navy;
-  border-radius: 5px;
-  background-color: #2ecc40;
+  border-radius: 50%;
+  background-color: wheat;
   color: white;
   cursor: pointer;
 }

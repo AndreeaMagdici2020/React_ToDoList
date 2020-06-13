@@ -24,7 +24,7 @@ class AddToDo extends React.Component {
             onChange={this.onChange}
             value={this.state.value}
           ></input>
-          <input className={styles.btn} type="submit" value="Add"></input>
+          <input className={styles.btn} type="submit" value="➕"></input>
         </form>
       </div>
     );

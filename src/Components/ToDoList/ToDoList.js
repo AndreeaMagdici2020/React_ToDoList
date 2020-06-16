@@ -12,6 +12,7 @@ class ToDoList extends React.Component {
             checked={item.done}
             markComplete={this.props.markComplete}
             delToDo={this.props.delToDo}
+            ShowItemCard={this.props.ShowItemCard}
           />
         ))}
       </div>

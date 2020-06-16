@@ -1,7 +1,10 @@
 import React from "react";
 import styles from "./ToDoItemsStyle.module.css";
-
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import EditIcon from "@material-ui/icons/Edit";
 import HighlightOffTwoToneIcon from "@material-ui/icons/HighlightOffTwoTone";
+import schedule from "./schedule.png";
+
 class ToDoItem extends React.Component {
   render() {
     const { id } = this.props;
@@ -28,6 +31,30 @@ class ToDoItem extends React.Component {
           onClick={() => this.props.delToDo(id)}
           style={{ fontSize: "31" }}
         />
+        <MoreHorizIcon
+          color="primary"
+          style={{ fontSize: "30", verticalAlign: "middle" }}
+        />
+        <EditIcon
+          color="primary"
+          style={{
+            float: "right",
+            marginRight: "50px",
+            verticalAlign: "middle",
+            marginTop: "10px",
+            cursor: "pointer",
+          }}
+          onClick={() => this.props.ShowItemCard(id)}
+        />
+
+        {this.props.todo.show === true ? (
+          <div className={styles.ToDoCard}>
+            <div className={styles.mydivheader}></div>
+            {this.props.todo.title}
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }

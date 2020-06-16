@@ -7,9 +7,24 @@ import AddToDo from "./Components/ToDoList/AddToDo";
 class App extends React.Component {
   state = {
     toDoItems: [
-      { id: Math.random() * 1000000, title: "cook dinner", done: false },
-      { id: Math.random() * 1000000, title: "clean house", done: false },
-      { id: Math.random() * 1000000, title: "watch Kdrama", done: false },
+      {
+        id: Math.random() * 1000000,
+        title: "cook dinner",
+        done: false,
+        show: false,
+      },
+      {
+        id: Math.random() * 1000000,
+        title: "clean house",
+        done: false,
+        show: false,
+      },
+      {
+        id: Math.random() * 1000000,
+        title: "watch Kdrama",
+        done: false,
+        show: false,
+      },
     ],
   };
   componentDidMount() {
@@ -56,6 +71,7 @@ class App extends React.Component {
       id: Math.random() * 10000,
       title: title,
       done: false,
+      show: false,
     };
     this.setState({ toDoItems: [...this.state.toDoItems, newToDo] });
     localStorage.setItem(
@@ -74,6 +90,41 @@ class App extends React.Component {
       })
     );
   };
+
+  ShowItemCard = (id) => {
+    this.setState({
+      toDoItems: this.state.toDoItems.map((item) => {
+        if (item.id === id) {
+          item.show = !item.show;
+          console.log(item);
+        }
+        return item;
+      }),
+    });
+    var itemDinLocalStorage = localStorage.getItem("ItemsinLocalStorage");
+    console.log("itemDinLocalStorage", JSON.parse(itemDinLocalStorage));
+    console.log(
+      "itemul de modificat",
+      JSON.parse(itemDinLocalStorage).toDoItems.map((item) => {
+        if (item.id === id) {
+          item.show = !item.show;
+        }
+        return item;
+      })
+    );
+    var pd = JSON.parse(itemDinLocalStorage).toDoItems.map((item) => {
+      if (item.id === id) {
+        item.show = !item.show;
+      }
+      return item;
+    });
+    console.log("pd este", pd);
+    localStorage.setItem(
+      "ItemsinLocalStorage",
+      JSON.stringify({ toDoItems: pd })
+    );
+  };
+
   render() {
     return (
       <div className="App">
@@ -84,6 +135,7 @@ class App extends React.Component {
           key={Math.random() * 10000}
           todoItems={this.state.toDoItems}
           delToDo={this.delToDo}
+          ShowItemCard={this.ShowItemCard}
         />
       </div>
     );

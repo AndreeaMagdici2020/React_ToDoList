@@ -3,7 +3,7 @@ import ToDoItem from "./ToDoItem";
 class ToDoList extends React.Component {
   render() {
     return (
-      <div>
+      <div className="toDoList">
         {this.props.todoItems.map((item) => (
           <ToDoItem
             key={Math.random() * 10000}

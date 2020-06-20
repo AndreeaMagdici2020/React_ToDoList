@@ -3,82 +3,35 @@ import "./App.css";
 import Header from "./Components/Header/Header";
 import ToDoList from "./Components/ToDoList/ToDoList";
 import AddToDo from "./Components/ToDoList/AddToDo";
-import Draggable from "react-draggable";
 import ReactDOM from "react-dom";
 
 class App extends React.Component {
   state = {
-    activeDrags: 0,
-    deltaPosition: {
-      x: 0,
-      y: 0,
-    },
-    controlledPosition: {
-      x: -400,
-      y: 200,
-    },
     toDoItems: [
       {
         id: Math.random() * 1000000,
         title: "cook dinner",
         done: false,
         show: false,
+        date: "",
       },
       {
         id: Math.random() * 1000000,
         title: "clean house",
         done: false,
         show: false,
+        date: "",
       },
       {
         id: Math.random() * 1000000,
         title: "watch Kdrama",
         done: false,
         show: false,
+        date: "",
       },
     ],
   };
-  //draggable component
-  handleDrag = (e, ui) => {
-    const { x, y } = this.state.deltaPosition;
-    this.setState({
-      deltaPosition: {
-        x: x + ui.deltaX,
-        y: y + ui.deltaY,
-      },
-    });
-  };
-  handleStart = () => {
-    this.setState({ activeDrags: ++this.state.activeDrags });
-  };
-  handleStop = () => {
-    this.setState({ activeDrags: --this.state.activeDrags });
-  };
-  // adjustXPos = (e) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   const { x, y } = this.state.controlledPosition;
-  //   this.setState({ controlledPosition: { x: x - 10, y } });
-  // };
 
-  // adjustYPos = (e) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   const { controlledPosition } = this.state;
-  //   const { x, y } = controlledPosition;
-  //   this.setState({ controlledPosition: { x, y: y - 10 } });
-  // };
-
-  // onControlledDrag = (e, position) => {
-  //   const { x, y } = position;
-  //   this.setState({ controlledPosition: { x, y } });
-  // };
-
-  // onControlledDragStop = (e, position) => {
-  //   this.onControlledDrag(e, position);
-  //   this.handleStop();
-  // };
-  //=========================>draggable
   componentDidMount() {
     const parsedData = JSON.parse(localStorage.getItem("ItemsinLocalStorage"));
     console.log("parsedData", parsedData);
@@ -124,6 +77,7 @@ class App extends React.Component {
       title: title,
       done: false,
       show: false,
+      date: "",
     };
     this.setState({ toDoItems: [...this.state.toDoItems, newToDo] });
     localStorage.setItem(
@@ -176,7 +130,6 @@ class App extends React.Component {
       JSON.stringify({ toDoItems: pd })
     );
   };
-
   render() {
     var tasks = {
       inProgress: [],
@@ -191,7 +144,7 @@ class App extends React.Component {
             style={{ backgroundColor: "red" }}
             draggable
           >
-            {task.title}
+            <span> {task.title} </span>
           </div>
         );
       } else {
@@ -199,19 +152,16 @@ class App extends React.Component {
           <div
             key={task.id}
             className="draggable"
-            style={{ backgroundColor: "green" }}
+            style={{ backgroundColor: "#d4eee2", maxWidth: "200px" }}
             draggable
           >
-            {task.title}
+            <span>{task.title}</span>
           </div>
         );
       }
     });
-    const dragHandlers = {
-      handleStart: this.handleStart,
-      handleStop: this.handleStop,
-    };
-    const { deltaPosition, controlledPosition } = this.state;
+
+    // const { deltaPosition, controlledPosition } = this.state;
     return (
       <div className="App" id="app">
         <Header key={Math.random() * 10000} />
@@ -224,46 +174,6 @@ class App extends React.Component {
           delToDo={this.delToDo}
           ShowItemCard={this.ShowItemCard}
         />
-        <Draggable
-          handle=".drag,.dragg2"
-          defaultPosition={{ x: 0, y: 0 }}
-          position={null}
-          grid={[25, 25]}
-          scale={1}
-          onStart={this.handleStart}
-          onDrag={this.handleDrag}
-          onStop={this.handleStop}
-        >
-          <div className="draggableDiv" draggable>
-            <div
-              draggable
-              className="dragg2"
-              style={{
-                minHeight: "300px",
-                width: "300px",
-                float: "right",
-                margin: "20px",
-              }}
-            >
-              <span>In Progress</span>
-              {tasks.inProgress}
-            </div>
-            <div
-              draggable
-              className="drag"
-              style={{
-                minHeight: "300px",
-                width: "300px",
-                float: "left",
-                marginRight: "50px",
-                margin: "20px",
-              }}
-            >
-              <span>Done</span>
-              {tasks.Done}
-            </div>
-          </div>
-        </Draggable>
       </div>
     );
   }

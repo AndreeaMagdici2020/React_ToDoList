@@ -26,8 +26,9 @@
 }
 
 .ToDoCard {
-  height: 300px;
-  width: 300px;
+  height: 400px;
+  width: 400px;
+  border-radius: 15px;
   background-color: navy;
   margin-top: 130px;
   margin-left: 300px;
@@ -40,6 +41,8 @@
 .mydivheader {
   height: 150px;
   width: 100%;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   cursor: move;
   z-index: 9;
   background-color: red;
@@ -47,4 +50,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
+}
+.h2 {
+  margin-left: 25px;
 }

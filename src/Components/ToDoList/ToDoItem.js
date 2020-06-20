@@ -4,11 +4,11 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import EditIcon from "@material-ui/icons/Edit";
 import HighlightOffTwoToneIcon from "@material-ui/icons/HighlightOffTwoTone";
 import Draggable from "react-draggable";
-import ReactDOM from "react-dom";
 
 class ToDoItem extends React.Component {
   state = {
-    ctiveDrags: 0,
+    newDate: "",
+    activeDrags: 0,
     deltaPosition: {
       x: 0,
       y: 0,
@@ -29,16 +29,39 @@ class ToDoItem extends React.Component {
     });
   };
   handleStart = () => {
-    this.setState({ activeDrags: ++this.state.activeDrags });
+    let activeDrags = this.state.activeDrags;
+    this.setState({ activeDrags: ++activeDrags });
   };
   handleStop = () => {
-    this.setState({ activeDrags: --this.state.activeDrags });
+    let activeDrags = this.state.activeDrags;
+    this.setState({ activeDrags: --activeDrags });
   };
   //================>Draggable
+  setItemdueDate = (event) => {
+    console.log("hello");
+    console.log("date din props:", this.props.todo.date);
+    this.setState({ newDate: new Date(event.target.value) });
+    console.log("this.state.newDate:", this.state.newDate);
+  };
+  onSubmit = () => {
+    let localStorageItemList = localStorage.getItem("ItemsinLocalStorage");
+    let parseData = JSON.parse(localStorageItemList);
+    parseData.toDoItems.map((item) => {
+      if (item.id === this.props.todo.id) {
+        item.date = this.state.newDate;
+      }
+    });
+    console.log("parseData", parseData);
+    localStorage.setItem(
+      "ItemsinLocalStorage",
+      JSON.stringify({ toDoItems: parseData.toDoItems })
+    );
+  };
   render() {
     const { id } = this.props;
     const style1 = { color: "red", textDecoration: "line-through" };
     const style2 = { color: "navy" };
+    const { date } = this.props.todo;
     const dragHandlers = {
       handleStart: this.handleStart,
       handleStop: this.handleStop,
@@ -90,14 +113,30 @@ class ToDoItem extends React.Component {
           onDrag={this.handleDrag}
           onStop={this.handleStop}
         >
-          <div>
+          <div className="draggZone">
             {this.props.todo.show === true ? (
-              <div>
-                <div className="dragg3">
-                  <div draggable className={styles.ToDoCard}>
-                    <div className={styles.mydivheader}></div>
-                    {this.props.todo.title}
-                  </div>
+              <div className="dragg3">
+                <div draggable className={styles.ToDoCard}>
+                  <div className={styles.mydivheader}></div>
+                  <h2 className={styles.h2}>{this.props.todo.title}</h2>
+                  <span style={{ marginLeft: "20px" }}>
+                    Due by: {this.props.todo.date}
+                  </span>
+                  <input
+                    style={{ marginLeft: "10px" }}
+                    placeholder="  Insert a date: mm.dd.yyyy"
+                    value={this.state.dateValue}
+                    onChange={this.setItemdueDate}
+                    type="text"
+                  ></input>
+                  <br />
+
+                  <button
+                    onClick={this.onSubmit}
+                    style={{ marginLeft: "40%", marginTop: "6%" }}
+                  >
+                    Update
+                  </button>
                 </div>
               </div>
             ) : (
